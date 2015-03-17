@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using behaviours;
+using SteeringBehaviours;
 
 public class FlockingManager
 {
@@ -10,7 +10,7 @@ public class FlockingManager
 	public FlockingManager (GameObject leader,List<GameObject> squad)
 	{
 		this.leader = leader;
-		this.leader.GetComponent<SteeringBehaviours> ().isLeader = true;
+		this.leader.GetComponent<Steering> ().isLeader = true;
 
 		this.squad = squad;
 
@@ -18,21 +18,21 @@ public class FlockingManager
 
 	public void beginFlocking()
 	{
-		leader.GetComponent<SteeringBehaviours>().enableBehaviour(behaviours.flock);
+		leader.GetComponent<Steering>().enableBehaviour(steeringBehaviours.behaviours.flock);
 		foreach (GameObject member in squad) 
 		{
-			member.GetComponent<SteeringBehaviours>().leader = leader;
-			member.GetComponent<SteeringBehaviours>().enableBehaviour(behaviours.flock);
+			member.GetComponent<Steering>().leader = leader;
+			member.GetComponent<Steering>().enableBehaviour(steeringBehaviours.behaviours.flock);
 		}
 	}
 
 	public void stopFlocking()
 	{
-		leader.GetComponent<SteeringBehaviours>().enableBehaviour(behaviours.flock);
+		leader.GetComponent<Steering>().enableBehaviour(steeringBehaviours.behaviours.flock);
 		foreach (GameObject member in squad) 
 		{
-			member.GetComponent<SteeringBehaviours>().leader = null;
-			member.GetComponent<SteeringBehaviours>().disableBehaviour(behaviours.flock);
+			member.GetComponent<Steering>().leader = null;
+			member.GetComponent<Steering>().disableBehaviour(steeringBehaviours.behaviours.flock);
 		}
 
 	}
